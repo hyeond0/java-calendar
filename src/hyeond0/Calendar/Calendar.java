@@ -14,18 +14,75 @@ public class Calendar {
             return MAX_DAYS[month - 1];
         }
     }
-    public void printCalendar(int year, int month) {
+    public void printLine(int maxDay, int firstline, int count) {
+        for(int i = 1; i <= maxDay; i++) {
+            System.out.printf("%3d", i);
+            firstline--;
+            if (firstline==0) {
+                System.out.println();
+            }
+            if (firstline < 0) {
+                count--;
+                if (count==0) {
+                    count = 7;
+                    System.out.println();
+                }
+            }
+        }
+    }
+    public void printCalendar(int year, int month, String weekday) {
         System.out.printf("    <<%4d년 %3d월>> \n", year, month);
         System.out.println("   일 월 화 수 목 금 토");
         System.out.println("----------------------");
 
         int maxDay = getMaxDaysOfMonth(year,month);
-        for(int i = 1; i <= maxDay; i++) {
-            System.out.printf("%3d", i);
-            if (i%7==0) {
-                System.out.println();
-            }
+        int firstLine;
+        int lineCount = 7;
+        switch (weekday) {
+            case "일":
+                firstLine = 7;
+                printLine(maxDay, firstLine, lineCount);
+                break;
+            case "월":
+                firstLine = 6;
+                System.out.print("   ");
+                printLine(maxDay, firstLine, lineCount);
+                break;
+            case "화":
+                firstLine = 5;
+                System.out.print("      ");
+                printLine(maxDay, firstLine, lineCount);
+                break;
+            case "수":
+                firstLine = 4;
+                System.out.print("         ");
+                printLine(maxDay, firstLine, lineCount);
+                break;
+            case "목":
+                firstLine = 3;
+                System.out.print("            ");
+                printLine(maxDay, firstLine, lineCount);
+                break;
+            case "금":
+                firstLine = 2;
+                System.out.print("               ");
+                printLine(maxDay, firstLine, lineCount);
+                break;
+            case "토":
+                firstLine = 1;
+                System.out.print("                  ");
+                printLine(maxDay, firstLine, lineCount);
+                break;
+            default:
+                break;
         }
+
+//        for(int i = 1; i <= maxDay; i++) {
+//            System.out.printf("%3d", i);
+//            if (i%7==0) {
+//                System.out.println();
+//            }
+//        }
         System.out.println();
 //        System.out.println(" 1  2  3  4  5  6  7");
 //        System.out.println(" 8  9 10 11 12 13 14");
