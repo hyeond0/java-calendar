@@ -7,6 +7,7 @@ public class Calendar {
     public boolean isLeapYear(int year) {
         return year % 4 == 0 && (year % 100 != 0 || year % 400 != 0);
     }
+
     public int getMaxDaysOfMonth(int year, int month) {
         if (isLeapYear(year)) {
             return LEAP_MAX_DAYS[month - 1];
@@ -14,28 +15,35 @@ public class Calendar {
             return MAX_DAYS[month - 1];
         }
     }
+
     public void printLine(int maxDay, int firstline, int count) {
-        for(int i = 1; i <= maxDay; i++) {
+        if (firstline != 0) {
+            for (int i = 0; i < 7 - firstline; i++) {
+                System.out.print("   ");
+            }
+        }
+        for (int i = 1; i <= maxDay; i++) {
             System.out.printf("%3d", i);
             firstline--;
-            if (firstline==0) {
+            if (firstline == 0) {
                 System.out.println();
             }
             if (firstline < 0) {
                 count--;
-                if (count==0) {
+                if (count == 0) {
                     count = 7;
                     System.out.println();
                 }
             }
         }
     }
+
     public void printCalendar(int year, int month, String weekday) {
         System.out.printf("    <<%4d년 %3d월>> \n", year, month);
         System.out.println("   일 월 화 수 목 금 토");
         System.out.println("----------------------");
 
-        int maxDay = getMaxDaysOfMonth(year,month);
+        int maxDay = getMaxDaysOfMonth(year, month);
         int firstLine;
         int lineCount = 7;
         switch (weekday) {
@@ -45,32 +53,26 @@ public class Calendar {
                 break;
             case "월":
                 firstLine = 6;
-                System.out.print("   ");
                 printLine(maxDay, firstLine, lineCount);
                 break;
             case "화":
                 firstLine = 5;
-                System.out.print("      ");
                 printLine(maxDay, firstLine, lineCount);
                 break;
             case "수":
                 firstLine = 4;
-                System.out.print("         ");
                 printLine(maxDay, firstLine, lineCount);
                 break;
             case "목":
                 firstLine = 3;
-                System.out.print("            ");
                 printLine(maxDay, firstLine, lineCount);
                 break;
             case "금":
                 firstLine = 2;
-                System.out.print("               ");
                 printLine(maxDay, firstLine, lineCount);
                 break;
             case "토":
                 firstLine = 1;
-                System.out.print("                  ");
                 printLine(maxDay, firstLine, lineCount);
                 break;
             default:
@@ -93,5 +95,5 @@ public class Calendar {
 //        }
 //        else if (MAX_DAYS[month-1] == 31) {
 //            System.out.println("29 30 31");
-        }
     }
+}
