@@ -13,26 +13,25 @@ public class Prompt {
             System.out.println("연도를 입력하세요.");
             System.out.print("YEAR> ");
             year = scanner.nextInt();
+            if (year == -1)
+                break;
             System.out.println("월을 입력하세요.");
             System.out.print("MONTH> ");
             month = scanner.nextInt();
-            System.out.println("첫 번째 요일을 입력하세요. (일, 월, 화, 수, 목, 금, 토)");
-            System.out.print("WEEKDAY> ");
-            weekday = scanner.next();
-            if (month == -1) {
-                break;
-            }
-            if (month > 12) {
+
+            if (month > 12 || month < 1) {
                 System.out.println("1월부터 12월까지만 입력 가능합니다.");
                 continue;
             }
-            cal.printCalendar(year, month, weekday);
+            cal.printCalendar(year, month);
         }
         System.out.println("Have a nice day!");
         scanner.close();
     }
     public static void main(String[] args) {
         //쉘 실행
+        Calendar calendar = new Calendar();
+        System.out.println();
         Prompt p = new Prompt();
         p.runPrompt();
     }

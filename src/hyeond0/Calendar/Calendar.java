@@ -1,5 +1,4 @@
 package hyeond0.Calendar;
-
 public class Calendar {
     private static final int[] MAX_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     private static final int[] LEAP_MAX_DAYS = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -38,7 +37,7 @@ public class Calendar {
         }
     }
 
-    public void printCalendar(int year, int month, String weekday) {
+    public void printCalendar(int year, int month) {
         System.out.printf("    <<%4d년 %3d월>> \n", year, month);
         System.out.println("   일 월 화 수 목 금 토");
         System.out.println("----------------------");
@@ -46,6 +45,10 @@ public class Calendar {
         int maxDay = getMaxDaysOfMonth(year, month);
         int firstLine;
         int lineCount = 7;
+
+        //get weekday automatically
+        String weekday = "일";
+
         switch (weekday) {
             case "일":
                 firstLine = 7;
@@ -97,3 +100,4 @@ public class Calendar {
 //            System.out.println("29 30 31");
     }
 }
+//commit test
