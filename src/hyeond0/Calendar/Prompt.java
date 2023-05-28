@@ -1,6 +1,4 @@
 package hyeond0.Calendar;
-
-import java.text.ParseException;
 import java.util.Scanner;
 
 public class Prompt {
@@ -15,7 +13,7 @@ public class Prompt {
         System.out.print("> ");
     }
 
-    public void runPrompt() throws ParseException {
+    public void runPrompt(){
         Scanner scanner = new Scanner(System.in);
         Calendar cal = new Calendar();
         boolean quit = false;
@@ -54,22 +52,12 @@ public class Prompt {
         System.out.print("MONTH> ");
         int month = s.nextInt();
         System.out.println("첫째 날의 요일을 입력하세요.");
-        System.out.println("WEEKDAY> ");
+        System.out.print("WEEKDAY> ");
         String weekday = s.next();
         c.printCalendar(year, month, weekday);
     }
 
-    private void registerSchedule(Scanner s, Calendar c) throws ParseException {
-//        System.out.println("[일정 등륵] 날짜를 입력하세요.");
-//        System.out.print("> ");
-//        String date = s.next();
-//        s.nextLine();
-//        System.out.println("일정을 입력하세요.");
-//        System.out.print("> ");
-//        String plan = s.nextLine();
-//        h.put(date, plan);
-//        System.out.println("일정이 등륵되었습니다.");
-//        System.out.println(h);
+    private void registerSchedule(Scanner s, Calendar c){
         System.out.println("[새 일정 등록]");
         System.out.println("날짜를 입력해 주세요 (yyyy-MM-dd).");
         System.out.print("> ");
@@ -80,18 +68,23 @@ public class Prompt {
         String text = s.nextLine();
         c.registerPlan(date, text);
     }
-    private void searchSchedule(Scanner s, Calendar c) throws ParseException {
+    private void searchSchedule(Scanner s, Calendar c) {
         System.out.println("[일정 검색] 날짜를 입력하세요.");
         System.out.print("> ");
         String date = s.next();
-        String plan = c.SearchPlan(date);
-        System.out.println("해당 날짜의 일정입니다.");
-        System.out.println(plan);
+        PlanItem plan = c.SearchPlan(date);
+        if (plan != null) {
+            System.out.println("해당 날짜의 일정입니다.");
+            System.out.println(plan.detail);
+        } else {
+            System.out.println("일정이 없습니다.");
+        }
+
     }
 
 
 
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
         //쉘 실행
         Prompt p = new Prompt();
         p.runPrompt();
