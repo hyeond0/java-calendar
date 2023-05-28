@@ -1,8 +1,28 @@
 package hyeond0.Calendar;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+
 public class Calendar {
     private static final int[] MAX_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     private static final int[] LEAP_MAX_DAYS = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
+    private HashMap <Date, String> planMap;
+
+    public Calendar() {
+        planMap = new HashMap<Date, String>();
+    }
+    public void registerPlan(String strDate, String plan) throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+        planMap.put(date, plan);
+    }
+
+    public String SearchPlan(String strDate) throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+        return planMap.get(date);
+    }
     public boolean isLeapYear(int year) {
         return year % 4 == 0 && (year % 100 != 0 || year % 400 != 0);
     }
@@ -37,7 +57,7 @@ public class Calendar {
         }
     }
 
-    public void printCalendar(int year, int month) {
+    public void printCalendar(int year, int month, String weekday) {
         System.out.printf("    <<%4d년 %3d월>> \n", year, month);
         System.out.println("   일 월 화 수 목 금 토");
         System.out.println("----------------------");
@@ -47,7 +67,6 @@ public class Calendar {
         int lineCount = 7;
 
         //get weekday automatically
-        String weekday = "일";
 
         switch (weekday) {
             case "일":
@@ -99,5 +118,7 @@ public class Calendar {
 //        else if (MAX_DAYS[month-1] == 31) {
 //            System.out.println("29 30 31");
     }
+
+
 }
 //commit test
